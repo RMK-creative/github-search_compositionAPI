@@ -108,6 +108,25 @@ export default {
       searchInput,
     };
   },
+  mounted() {
+    const store = inject("store");
+    store.methods.getUser();
+
+    // get user light/dark theme preference
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      store.state.userThemeSetting = "dark";
+    } else {
+      store.state.userThemeSetting = "light";
+    }
+
+    // set themeIsLight to match user preference
+    store.state.userThemeSetting === "light"
+      ? (store.state.themeIsLight = true)
+      : (store.state.themeIsLight = false);
+  },
 };
 </script>
 
