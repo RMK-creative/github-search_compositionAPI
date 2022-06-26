@@ -17,7 +17,43 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+// colors light mode */
+$light-primary-bg: #f6f8ff;
+$light-off-white: #fefefe;
+$light-grey: #697c9a;
+$light-blueGrey: #4b6a9b;
+$light-off-black: #2b3442;
+
+// colors dark mode
+$dark-primary-bg: #141d2f;
+$dark-blueGrey: #1e2a47;
+$dark-white: #ffffff;
+
+// general
+$btn-blue: #0079ff;
+$btn-blue-active: #60abff;
+$error-red: #f74646;
+$logo-light: #222731;
+
+:root {
+  --primary-bg: #{$light-primary-bg};
+  --card-bg: #{$light-off-white};
+  --text-primary: #{$light-blueGrey}; // bio of card
+  --text-secondary: #{$light-off-black}; // numbers on card
+  --text-accent: #{$light-grey}; // joined ...
+  --logo: #{$logo-light};
+}
+
+:root.dark-theme {
+  --primary-bg: #{$dark-primary-bg};
+  --card-bg: #{$dark-blueGrey};
+  --text-primary: #{$dark-white};
+  --text-secondary: #{$dark-white};
+  --text-accent: #{$dark-white};
+  --logo: #{$dark-white};
+}
+
 /*
     Reset template from: https://piccalil.li/blog/a-modern-css-reset/
 */
@@ -64,6 +100,12 @@ html {
 /* Set core body defaults */
 body {
   text-rendering: optimizeSpeed;
+  min-height: 100vh;
+  font-family: "Space Mono", monospace;
+  background-color: var(--primary-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* A elements that don't have a class get default styles */

@@ -17,6 +17,8 @@ const state = reactive({
     company: "",
   },
   error: false,
+  themeIsLight: false,
+  userThemeSetting: "",
 });
 
 const methods = {
@@ -24,7 +26,6 @@ const methods = {
     await fetch(`https://api.github.com/users/${state.userSearch}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         state.user.name = data.name;
         state.user.avatar = data.avatar_url;
         state.user.handle = data.login;
@@ -45,6 +46,12 @@ const methods = {
   },
   setUserSearch(val) {
     state.userSearch = val;
+  },
+  themeSwitch() {
+    state.themeIsLight = !state.themeIsLight;
+    !state.themeIsLight
+      ? (document.documentElement.className = "dark-theme")
+      : (document.documentElement.className = "light-theme");
   },
 };
 
