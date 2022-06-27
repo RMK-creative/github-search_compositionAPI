@@ -45,7 +45,7 @@ const methods = {
       });
   },
   setUserSearch(val) {
-    !val === "" ? (state.userSearch = val) : null;
+    val.length > 0 ? (state.userSearch = val) : null;
   },
   themeSwitch() {
     state.themeIsLight = !state.themeIsLight;
