@@ -1,5 +1,7 @@
 <template>
   <main>
+    <Nav />
+    <UserSearchBar />
     <UserCard />
   </main>
 </template>
@@ -8,10 +10,14 @@
 import { provide } from "vue";
 import store from "@/store";
 import UserCard from "@/components/UserCard.vue";
+import Nav from "@/components/Nav.vue";
+import UserSearchBar from "@/components/UserSearchBar.vue";
 
 export default {
   components: {
     UserCard,
+    Nav,
+    UserSearchBar,
   },
   setup() {
     provide("store", store);
