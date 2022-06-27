@@ -1,5 +1,7 @@
 <template>
-  <UserCard />
+  <main>
+    <UserCard />
+  </main>
 </template>
 
 <script>
@@ -28,9 +30,9 @@ $light-off-black: #2b3442;
 // colors dark mode
 $dark-primary-bg: #141d2f;
 $dark-blueGrey: #1e2a47;
-$dark-white: #ffffff;
 
 // general
+$white: #ffffff;
 $btn-blue: #0079ff;
 $btn-blue-active: #60abff;
 $error-red: #f74646;
@@ -42,16 +44,23 @@ $logo-light: #222731;
   --text-primary: #{$light-blueGrey}; // bio of card
   --text-secondary: #{$light-off-black}; // numbers on card
   --text-accent: #{$light-grey}; // joined ...
+  --white: #{$white};
   --logo: #{$logo-light};
+  --btn-blue: #{$btn-blue};
+  --btn-blue-active: #{$btn-blue-active};
+  --error-red: #{$error-red};
 }
 
 :root.dark-theme {
   --primary-bg: #{$dark-primary-bg};
   --card-bg: #{$dark-blueGrey};
-  --text-primary: #{$dark-white};
-  --text-secondary: #{$dark-white};
-  --text-accent: #{$dark-white};
-  --logo: #{$dark-white};
+  --text-primary: #{$white};
+  --text-secondary: #{$white};
+  --text-accent: #{$white};
+  --logo: #{$white};
+  --btn-blue: #{$btn-blue};
+  --btn-blue-active: #{$btn-blue-active};
+  --error-red: #{$error-red};
 }
 
 /*
@@ -86,8 +95,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
   list-style: none;
 }
 
@@ -103,9 +112,8 @@ body {
   min-height: 100vh;
   font-family: "Space Mono", monospace;
   background-color: var(--primary-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 /* A elements that don't have a class get default styles */
@@ -137,5 +145,11 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+main {
+  max-width: 45.5rem;
+  padding: 1rem;
+  margin: 0 auto;
 }
 </style>
