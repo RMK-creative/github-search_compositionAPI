@@ -1,132 +1,120 @@
 <template>
-  <nav class="navbar">
-    <h1 class="navbar__logo">dev<span>f</span>inder</h1>
-    <button class="btn navbar__theme-btn" @click="store.methods.themeSwitch()">
-      <span v-show="store.state.themeIsLight">
-        dark
-        <img
-          src="@/assets/icon-moon.svg"
-          alt="light theme active"
-          aria-hidden="true"
-        />
-      </span>
-      <span v-show="!store.state.themeIsLight">
-        light
-        <img
-          src="@/assets/icon-sun.svg"
-          alt="dark theme active"
-          aria-hidden="true"
-        />
-      </span>
-    </button>
-  </nav>
-  <section class="user-search">
-    <form
-      class="user-search__form"
-      action="user-search"
-      @submit.prevent="store.methods.getUser()"
-    >
-      <img
-        class="user-search__icon"
-        src="@/assets/icon-search.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <input
-        v-model="searchInput"
-        type="text"
-        placeholder="Search GitHub username"
-        name="user-search"
-        id="user-search"
-        class="user-search__input"
-        aria-label="search github username"
-      />
-      <input
-        class="user-search__button"
-        id="search__button"
-        type="submit"
-        value="submit"
-      />
-      <p class="error"></p>
-    </form>
-  </section>
-
   <div class="card-wrapper">
     <section class="user-card">
-      <header>
-        <img :src="store.state.user.avatar" alt="" width="117" />
-        <h2 class="user-card__name">{{ store.state.user.name }}</h2>
-        <h3 class="user-card__handle">@{{ store.state.user.handle }}</h3>
-        <h4 class="user-card__joined">Joined {{ store.state.user.joined }}</h4>
-        <p class="user-card__blurb">{{ store.state.user.bio }}</p>
-
-        <section class="user-card__stats">
-          <ul>
-            <li>
-              <span class="user-card__stat-label">Repos </span>
-              <span class="user-card__stat-number">{{
-                store.state.user.repos
-              }}</span>
-            </li>
-            <li>
-              <span class="user-card__stat-label">Followers </span>
-              <span class="user-card__stat-number">{{
-                store.state.user.followers
-              }}</span>
-            </li>
-            <li>
-              <span class="user-card__stat-label">Following </span>
-              <span class="user-card__stat-number">{{
-                store.state.user.following
-              }}</span>
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <ul class="user-card__contact">
-            <li>
-              <span></span>
-              Location {{ store.state.user.location }}
-            </li>
-            <li>
-              <span></span>
-              Blog {{ store.state.user.blog }}
-            </li>
-            <li>
-              <span></span>
-              Twitter @{{ store.state.user.twitter }}
-            </li>
-            <li>
-              <span></span>
-              Company {{ store.state.user.company }}
-            </li>
-          </ul>
-        </section>
+      <header class="user-card__header">
+        <img
+          class="user-card__avatar"
+          :src="store.state.user.avatar"
+          alt=""
+          width="117"
+        />
+        <div class="user-card__header--text">
+          <div>
+            <h2 class="user-card__name">{{ store.state.user.name }}</h2>
+            <h3 class="user-card__handle">@{{ store.state.user.handle }}</h3>
+          </div>
+          <h4 class="user-card__joined">
+            Joined {{ formatDate(store.state.user.joined) }}
+          </h4>
+        </div>
       </header>
+
+      <section>
+        <p class="user-card__bio">{{ store.state.user.bio }}</p>
+      </section>
+
+      <section>
+        <ul class="user-card__stats">
+          <li class="user-card__stats-list-item">
+            <span class="user-card__stats-label">Repos </span>
+            <span class="user-card__stats-number">{{
+              store.state.user.repos
+            }}</span>
+          </li>
+          <li class="user-card__stats-list-item">
+            <span class="user-card__stats-label">Followers </span>
+            <span class="user-card__stats-number">{{
+              store.state.user.followers
+            }}</span>
+          </li>
+          <li class="user-card__stats-list-item">
+            <span class="user-card__stats-label">Following </span>
+            <span class="user-card__stats-number">{{
+              store.state.user.following
+            }}</span>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <ul class="user-card__contact">
+          <li>
+            <span>
+              <img
+                class="user-card__contact-icon"
+                src="@/assets/icon-location.svg"
+                alt=""
+                aria-hidden="true"
+              />
+            </span>
+            {{ store.state.user.location }}
+          </li>
+          <li>
+            <span>
+              <img
+                class="user-card__contact-icon"
+                src="@/assets/icon-website.svg"
+                alt=""
+                aria-hidden="true"
+              />
+              {{ store.state.user.blog }}
+            </span>
+          </li>
+          <li>
+            <span>
+              <img
+                class="user-card__contact-icon"
+                src="@/assets/icon-twitter.svg"
+                alt=""
+                aria-hidden="true"
+              />
+              {{ store.state.user.blog }}
+            </span>
+            {{ store.state.user.twitter }}
+          </li>
+          <li>
+            <span>
+              <img
+                class="user-card__contact-icon"
+                src="@/assets/icon-company.svg"
+                alt=""
+                aria-hidden="true"
+              />
+              {{ store.state.user.blog }}
+            </span>
+            {{ store.state.user.company }}
+          </li>
+        </ul>
+      </section>
     </section>
   </div>
 </template>
 
 <script>
-import { inject, computed } from "vue";
+import { inject } from "vue";
+import Moment from "moment";
 
 export default {
+  methods: {
+    formatDate(date) {
+      return Moment(date).format("DD MMM YYYY");
+    },
+  },
   setup() {
     const store = inject("store");
-    const searchInput = computed({
-      get() {
-        return store.state.userSearch;
-      },
-      set(val) {
-        // update state with value from search input
-        store.methods.setUserSearch(val);
-      },
-    });
 
     return {
       store,
-      searchInput,
     };
   },
   mounted() {
@@ -153,95 +141,98 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-/* navigation */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 2.25rem 0;
-
-  &__logo {
-    color: var(--logo);
-    font-size: 1.625rem;
-    font-family: "Space Mono";
-    font-weight: 700;
-  }
-
-  &__logo span {
-    letter-spacing: -5px;
-  }
-
-  &__theme-btn {
-    border: none;
-    background-color: transparent;
-    color: var(--text-primary);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-}
-
 .user-card {
   background-color: var(--card-bg);
   color: var(--text-primary);
-}
-
-// search bar
-
-.user-search {
-  color: var(--text-primary);
-  background-color: var(--card-bg);
-  padding: 0 1rem;
+  width: 100%;
   border-radius: 10px;
-  height: 3.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  margin-bottom: 1rem;
+  padding: 2rem 1.5rem;
 
-  &__form {
-    background-color: var(--card-bg);
-    width: 100%;
+  // **** header section **** //
+  &__header {
+    display: flex;
+    gap: 1.25rem;
+
+    &--text {
+      @include breakpoint_large {
+        display: flex;
+      }
+    }
   }
 
-  &__input {
-    background-color: var(--card-bg);
-    outline: none;
-    border: none;
-    min-width: 80%;
+  &__avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+
+  &__name {
+    font-size: 1rem;
+  }
+
+  &__handle {
+    color: var(--btn-blue);
+  }
+
+  &__handle,
+  &__joined {
     font-size: 0.8125rem;
-    font-weight: 400;
-    margin-left: 2rem;
-    color: var(--text-primary);
-  }
-  &__input:focus {
-    outline: none;
-    background-color: var(--card-bg);
+    font-weight: 300;
   }
 
-  &__icon {
-    position: absolute;
+  &__bio {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
   }
 
-  &__button {
-    position: absolute;
-    top: 0.45rem;
-    right: 0.45rem;
-    padding: 0.75rem;
-    font-size: 0.875rem;
-    text-transform: capitalize;
-    background-color: var(--btn-blue);
-    color: var(--white);
-    border: none;
+  // **** stats section **** //
+  &__stats {
+    background-color: var(--primary-bg);
+    padding: 1rem 1.5rem;
     border-radius: 10px;
-    font-weight: 700;
-  }
-}
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    max-width: 30rem;
 
-::placeholder {
-  color: var(--text-primary);
+    &-list-item {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin: 0.3rem;
+      flex-wrap: wrap;
+      max-width: 7ch;
+    }
+
+    &-label {
+      font-size: 0.6875rem;
+    }
+
+    &-number {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+  }
+
+  // **** contact section **** //
+  &__contact {
+    margin-top: 2rem;
+    font-size: 0.8125rem;
+
+    & > li:first-child {
+      margin-left: 5px;
+    }
+
+    & li {
+      margin: 0.75rem 0;
+      display: flex;
+    }
+
+    &-icon {
+      margin-right: 1rem;
+    }
+  }
 }
 </style>
