@@ -149,7 +149,7 @@ select {
 
 main {
   max-width: 45.5rem;
-  padding: 1rem;
+  padding: 2rem 1.5rem;
   margin: 0 auto;
 }
 </style>
