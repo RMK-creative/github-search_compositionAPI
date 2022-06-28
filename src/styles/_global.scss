@@ -29,5 +29,6 @@
 
 .filter-grey {
   filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(4504%)
-    hue-rotate(327deg) brightness(88%) contrast(72%);
+    hue-rotate(100deg) brightness(88%) contrast(60%);
+  opacity: 0.8;
 }

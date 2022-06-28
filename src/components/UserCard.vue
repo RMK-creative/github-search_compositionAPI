@@ -50,7 +50,7 @@
 
       <section>
         <ul class="user-card__contact">
-          <li>
+          <li :class="{ 'filter-grey': !store.state.user.location }">
             <span>
               <img
                 class="user-card__contact-icon"
@@ -61,7 +61,7 @@
             </span>
             {{ store.state.user.location || "Not available" }}
           </li>
-          <li>
+          <li :class="{ 'filter-grey': !store.state.user.blog }">
             <span>
               <img
                 class="user-card__contact-icon"
@@ -72,7 +72,7 @@
             </span>
             {{ store.state.user.blog || "Not available" }}
           </li>
-          <li>
+          <li :class="{ 'filter-grey': !store.state.user.twitter }">
             <span>
               <img
                 class="user-card__contact-icon"
@@ -83,7 +83,7 @@
             </span>
             {{ store.state.user.twitter || "Not available" }}
           </li>
-          <li>
+          <li :class="{ 'filter-grey': !store.state.user.company }">
             <span>
               <img
                 class="user-card__contact-icon"

@@ -86,6 +86,7 @@ export default {
     font-weight: 400;
     margin-left: 2rem;
     color: var(--text-primary);
+    cursor: pointer;
     @include breakpoint_medium {
       font-size: 1.125rem;
     }
@@ -111,10 +112,15 @@ export default {
     border: none;
     border-radius: 10px;
     font-weight: 400;
+    cursor: pointer;
 
     @include breakpoint_medium {
       padding: 0.75rem 1.25rem;
       font-size: 1rem;
+    }
+
+    &:hover {
+      background-color: var(--btn-blue-active);
     }
   }
   ::placeholder {

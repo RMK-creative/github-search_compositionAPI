@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <h1 class="navbar__logo">dev<span>f</span>inder</h1>
+    <h1 class="navbar__logo">devfinder</h1>
     <button class="btn navbar__theme-btn" @click="store.methods.themeSwitch()">
       <span v-show="store.state.themeIsLight">
         dark
@@ -45,12 +45,8 @@ export default {
   &__logo {
     color: var(--logo);
     font-size: 1.625rem;
-    font-family: "Space Mono";
+    // font-family: "Space Mono";
     font-weight: 700;
-  }
-
-  &__logo span {
-    letter-spacing: -5px;
   }
 
   &__theme-btn {
@@ -60,6 +56,7 @@ export default {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-size: 0.8125rem;
+    cursor: pointer;
   }
 }
 </style>
