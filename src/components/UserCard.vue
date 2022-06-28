@@ -19,7 +19,7 @@
       </header>
 
       <section class="user-card__bio">
-        <p>{{ store.state.user.bio }}</p>
+        <p>{{ store.state.user.bio || "This user has no bio" }}</p>
       </section>
 
       <section>
@@ -56,7 +56,7 @@
                 aria-hidden="true"
               />
             </span>
-            {{ store.state.user.location }}
+            {{ store.state.user.location || "Not available" }}
           </li>
           <li>
             <span>
@@ -66,8 +66,8 @@
                 alt=""
                 aria-hidden="true"
               />
-              {{ store.state.user.blog }}
             </span>
+            {{ store.state.user.blog || "Not available" }}
           </li>
           <li>
             <span>
@@ -77,9 +77,8 @@
                 alt=""
                 aria-hidden="true"
               />
-              {{ store.state.user.blog }}
             </span>
-            {{ store.state.user.twitter }}
+            {{ store.state.user.twitter || "Not available" }}
           </li>
           <li>
             <span>
@@ -89,9 +88,8 @@
                 alt=""
                 aria-hidden="true"
               />
-              {{ store.state.user.blog }}
             </span>
-            {{ store.state.user.company }}
+            {{ store.state.user.company || "Not available" }}
           </li>
         </ul>
       </section>
@@ -288,7 +286,7 @@ export default {
 .user-card__stats,
 .user-card__contact {
   @include breakpoint_large {
-    margin-left: 8.7rem;
+    margin-left: 10rem;
   }
 }
 </style>

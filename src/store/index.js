@@ -1,4 +1,5 @@
 import { reactive } from "vue";
+import axios from "axios";
 
 const state = reactive({
   userSearch: "octocat",
@@ -23,26 +24,28 @@ const state = reactive({
 
 const methods = {
   async getUser() {
-    await fetch(`https://api.github.com/users/${state.userSearch}`)
-      .then((res) => res.json())
-      .then((data) => {
-        state.user.name = data.name;
-        state.user.avatar = data.avatar_url;
-        state.user.handle = data.login;
-        state.user.joined = data.created_at;
-        state.user.bio = data.bio;
-        state.user.repos = data.public_repos;
-        state.user.followers = data.followers;
-        state.user.following = data.following;
-        state.user.location = data.location;
-        state.user.website = data.blog;
-        state.user.twitter = data.twitter_username;
-        state.user.company = data.company;
-      })
-      .catch((error) => {
-        console.log(console.log(error.message));
-        state.error = true;
-      });
+    state.error = false;
+    try {
+      await axios
+        .get(`https://api.github.com/users/${state.userSearch}`)
+        .then((res) => {
+          state.user.name = res.data.name;
+          state.user.avatar = res.data.avatar_url;
+          state.user.handle = res.data.login;
+          state.user.joined = res.data.created_at;
+          state.user.bio = res.data.bio;
+          state.user.repos = res.data.public_repos;
+          state.user.followers = res.data.followers;
+          state.user.following = res.data.following;
+          state.user.location = res.data.location;
+          state.user.website = res.data.blog;
+          state.user.twitter = res.data.twitter_username;
+          state.user.company = res.data.company;
+        });
+    } catch (error) {
+      console.log(console.log(error.message));
+      state.error = true;
+    }
   },
   setUserSearch(val) {
     val.length > 0 ? (state.userSearch = val) : null;
