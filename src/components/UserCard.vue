@@ -1,6 +1,9 @@
 <template>
   <div class="card-wrapper">
-    <section class="user-card">
+    <section
+      class="user-card"
+      :class="{ 'box-shadow': store.state.themeIsLight }"
+    >
       <header class="user-card__header">
         <img
           class="user-card__avatar"
@@ -145,21 +148,14 @@ export default {
   width: 100%;
   border-radius: 10px;
   padding: 2rem 1.5rem;
+  position: relative;
+  @include breakpoint_large {
+  }
 
   // **** header section **** //
   &__header {
     display: flex;
     gap: 1.25rem;
-
-    @include breakpoint_large {
-      justify-content: center;
-    }
-
-    &--text {
-      @include breakpoint_large {
-        display: flex;
-      }
-    }
   }
 
   &__avatar {
@@ -170,12 +166,26 @@ export default {
       width: 117px;
       height: 117px;
     }
+    @include breakpoint_large {
+      position: absolute;
+      left: 2rem;
+      top: 2rem;
+    }
+  }
+
+  &__header--text {
+    @include breakpoint_large {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &__name {
+    color: var(--text-secondary);
     font-size: 1rem;
     @include breakpoint_medium {
-      font-size: 1.265rem;
+      font-size: 1.625rem;
     }
   }
 
@@ -195,8 +205,8 @@ export default {
 
   &__joined {
     font-weight: 400;
-    @include breakpoint_large {
-      margin: 0rem 0 0 10.5rem;
+    @include breakpoint_medium {
+      font-size: 0.9375rem;
     }
   }
 
@@ -207,9 +217,6 @@ export default {
     max-width: 30rem;
     @include breakpoint_medium {
       font-size: 0.9375rem;
-    }
-    @include breakpoint_large {
-      margin-top: -3rem;
     }
   }
 
@@ -241,6 +248,7 @@ export default {
     }
 
     &-number {
+      color: var(--text-secondary);
       font-size: 1rem;
       margin-top: 0.8rem;
       @include breakpoint_medium {
@@ -282,6 +290,7 @@ export default {
   }
 }
 
+.user-card__header,
 .user-card__bio,
 .user-card__stats,
 .user-card__contact {
