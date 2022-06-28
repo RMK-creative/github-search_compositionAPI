@@ -1,10 +1,14 @@
 <template>
-  <section class="user-search">
+  <section
+    class="user-search"
+    :class="{ 'box-shadow': store.state.themeIsLight }"
+  >
     <form
       class="user-search__form"
       action="user-search"
       @submit.prevent="store.methods.getUser()"
     >
+      <p v-if="store.state.error" class="user-search__error">No results</p>
       <img
         class="user-search__icon"
         src="@/assets/icon-search.svg"
@@ -110,10 +114,23 @@ export default {
 
     @include breakpoint_medium {
       padding: 0.75rem 1.25rem;
+      font-size: 1rem;
     }
   }
   ::placeholder {
     color: var(--text-accent);
+    opacity: 0.6;
+  }
+
+  .user-search__error {
+    color: var(--error-red);
+    position: absolute;
+    top: 1.2rem;
+    right: 6.5rem;
+    font-size: 0.9375rem;
+    @include breakpoint_medium {
+      right: 7.5rem;
+    }
   }
 }
 </style>
