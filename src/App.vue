@@ -154,8 +154,16 @@ select {
 }
 
 main {
-  max-width: 45.5rem;
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem;
   margin: 0 auto;
+
+  @include breakpoint_medium {
+    max-width: 35rem;
+    padding: 2rem;
+  }
+  @include breakpoint_large {
+    max-width: 45.5rem;
+    padding: 1rem;
+  }
 }
 </style>

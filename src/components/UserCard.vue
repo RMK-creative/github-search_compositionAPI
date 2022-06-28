@@ -5,8 +5,7 @@
         <img
           class="user-card__avatar"
           :src="store.state.user.avatar"
-          alt=""
-          width="117"
+          alt="{{ store.state.user.name }}"
         />
         <div class="user-card__header--text">
           <div>
@@ -19,8 +18,8 @@
         </div>
       </header>
 
-      <section>
-        <p class="user-card__bio">{{ store.state.user.bio }}</p>
+      <section class="user-card__bio">
+        <p>{{ store.state.user.bio }}</p>
       </section>
 
       <section>
@@ -119,7 +118,7 @@ export default {
   },
   mounted() {
     const store = inject("store"); // access state
-    store.methods.getUser(); //
+    store.methods.getUser();
 
     // get user light/dark theme preference & add class name to root element for styling
     if (
@@ -154,6 +153,10 @@ export default {
     display: flex;
     gap: 1.25rem;
 
+    @include breakpoint_large {
+      justify-content: center;
+    }
+
     &--text {
       @include breakpoint_large {
         display: flex;
@@ -165,25 +168,51 @@ export default {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    @include breakpoint_medium {
+      width: 117px;
+      height: 117px;
+    }
   }
 
   &__name {
     font-size: 1rem;
-  }
-
-  &__handle {
-    color: var(--btn-blue);
+    @include breakpoint_medium {
+      font-size: 1.265rem;
+    }
   }
 
   &__handle,
   &__joined {
     font-size: 0.8125rem;
     font-weight: 300;
+    @include breakpoint_medium {
+      font-size: 0.9375rem;
+    }
+  }
+
+  &__handle {
+    color: var(--btn-blue);
+    margin-bottom: 5px;
+  }
+
+  &__joined {
+    font-weight: 400;
+    @include breakpoint_large {
+      margin: 0rem 0 0 10.5rem;
+    }
   }
 
   &__bio {
     margin-top: 1rem;
-    font-size: 0.9375rem;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    max-width: 30rem;
+    @include breakpoint_medium {
+      font-size: 0.9375rem;
+    }
+    @include breakpoint_large {
+      margin-top: -3rem;
+    }
   }
 
   // **** stats section **** //
@@ -208,11 +237,19 @@ export default {
 
     &-label {
       font-size: 0.6875rem;
+      @include breakpoint_medium {
+        font-size: 0.8125rem;
+      }
     }
 
     &-number {
       font-size: 1rem;
-      font-weight: 700;
+      margin-top: 0.8rem;
+      @include breakpoint_medium {
+        font-size: 1.375rem;
+        text-align: left;
+        margin-top: 0.3rem;
+      }
     }
   }
 
@@ -220,6 +257,14 @@ export default {
   &__contact {
     margin-top: 2rem;
     font-size: 0.8125rem;
+    @include breakpoint_medium {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      min-height: 4rem;
+      max-height: 7rem;
+      font-size: 0.9375rem;
+    }
 
     & > li:first-child {
       margin-left: 5px;
@@ -228,11 +273,22 @@ export default {
     & li {
       margin: 0.75rem 0;
       display: flex;
+      @include breakpoint_medium {
+        margin: 0.4rem 0;
+      }
     }
 
     &-icon {
       margin-right: 1rem;
     }
+  }
+}
+
+.user-card__bio,
+.user-card__stats,
+.user-card__contact {
+  @include breakpoint_large {
+    margin-left: 8.7rem;
   }
 }
 </style>

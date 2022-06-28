@@ -1,5 +1,29 @@
-@mixin tablet-bp {
-  @media only screen and (min-width: 768px) {
+// for tablet size
+@mixin breakpoint_medium {
+  @media only screen and (min-width: 600px) {
     @content;
   }
+}
+
+// desktop
+@mixin breakpoint_large {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+// xl-desktop
+@mixin breakpoint_X-large {
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+.filter-white {
+  filter: brightness(0) invert(1);
+}
+
+.filter-grey {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(4504%)
+    hue-rotate(327deg) brightness(88%) contrast(72%);
 }

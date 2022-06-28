@@ -82,6 +82,9 @@ export default {
     font-weight: 400;
     margin-left: 2rem;
     color: var(--text-primary);
+    @include breakpoint_medium {
+      font-size: 1.125rem;
+    }
   }
   &__input:focus {
     outline: none;
@@ -103,7 +106,11 @@ export default {
     color: var(--white);
     border: none;
     border-radius: 10px;
-    font-weight: 700;
+    font-weight: 400;
+
+    @include breakpoint_medium {
+      padding: 0.75rem 1.25rem;
+    }
   }
   ::placeholder {
     color: var(--text-accent);
