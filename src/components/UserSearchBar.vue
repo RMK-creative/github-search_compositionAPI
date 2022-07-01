@@ -23,6 +23,7 @@
         id="user-search"
         class="user-search__input"
         aria-label="search github username"
+        autocomplete="off"
       />
       <input
         class="user-search__button"
