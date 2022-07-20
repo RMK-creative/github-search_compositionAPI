@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="user-search"
-    :class="{ 'box-shadow': store.state.themeIsLight }"
-  >
+  <div class="user-search" :class="{ 'box-shadow': store.state.themeIsLight }">
     <form
       class="user-search__form"
       action="user-search"
@@ -33,7 +30,7 @@
       />
       <p class="error"></p>
     </form>
-  </section>
+  </div>
 </template>
 
 <script>
