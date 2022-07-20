@@ -41,6 +41,7 @@ const methods = {
           state.user.website = res.data.blog;
           state.user.twitter = res.data.twitter_username;
           state.user.company = res.data.company;
+          state.userSearch = "";
         });
     } catch (error) {
       console.log(console.log(error.message));
