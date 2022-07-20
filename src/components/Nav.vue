@@ -1,6 +1,8 @@
 <template>
   <nav class="navbar">
-    <h1 class="navbar__logo">devfinder</h1>
+    <a href="/">
+      <h1 class="navbar__logo">devfinder</h1>
+    </a>
     <button class="btn navbar__theme-btn" @click="store.methods.themeSwitch()">
       <span v-show="store.state.themeIsLight">
         dark
@@ -47,6 +49,7 @@ export default {
     font-size: 1.625rem;
     // font-family: "Space Mono";
     font-weight: 700;
+    cursor: pointer;
   }
 
   &__theme-btn {
