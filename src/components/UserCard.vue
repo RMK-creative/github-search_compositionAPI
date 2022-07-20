@@ -21,11 +21,11 @@
         </div>
       </header>
 
-      <section class="user-card__bio">
+      <div class="user-card__bio">
         <p>{{ store.state.user.bio || "This user has no bio" }}</p>
-      </section>
+      </div>
 
-      <section>
+      <div>
         <ul class="user-card__stats">
           <li class="user-card__stats-list-item">
             <span class="user-card__stats-label">Repos </span>
@@ -46,9 +46,9 @@
             }}</span>
           </li>
         </ul>
-      </section>
+      </div>
 
-      <section>
+      <div>
         <ul class="user-card__contact">
           <li :class="{ 'filter-grey': !store.state.user.location }">
             <span>
@@ -95,7 +95,7 @@
             {{ store.state.user.company || "Not available" }}
           </li>
         </ul>
-      </section>
+      </div>
     </section>
   </div>
 </template>
